@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { GameResults, getLastGame } from "../../src/logic/gameManager";
 import globalStyle from "../../src/styles";
-import { View, Text, SafeAreaView } from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { View, Text, SafeAreaView, Button } from "react-native";
+import { Link, Stack, useLocalSearchParams } from "expo-router";
 import { analyseResults, calculateDiffs } from "../../src/logic/analyseResults";
 import TimeBetweenClicks from "../../src/graphs/TimeBetweenClicks";
 import { getStats } from "../../src/logic/statsManager";
@@ -36,8 +36,10 @@ function ResultsPage() {
                         <TimeBetweenClicks diffs={diffs} />
                     </View>
                     <View style={{ height: 210 }} />
+                    <Link href="/history">
+                        <Text style={{ ...globalStyle.text, color: "yellow" }}>View History</Text>
+                    </Link>
                 </View>
-                <StatusBar />
             </SafeAreaView>
         </View>
 

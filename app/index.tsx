@@ -6,7 +6,8 @@ import globalStyle from "../src/styles";
 import { saveGame } from "../src/logic/gameManager";
 import { analyseResults } from "../src/logic/analyseResults";
 import { saveStats } from "../src/logic/statsManager";
-import { Stack, router } from "expo-router";
+import { Link, Stack, router } from "expo-router";
+import * as Haptics from 'expo-haptics';
 
 export default function App() {
   const [clickTimes, setClickTimes] = useState<number[]>([]);
@@ -16,14 +17,17 @@ export default function App() {
 
     if (8 - clickTimes.length == 1) {
       // saveGame([...clickTimes, performance.now()])
+      Haptics.notificationAsync(
+        Haptics.NotificationFeedbackType.Success
+      )
       saveStats([...clickTimes, performance.now()])
       setClickTimes([])
-      router.push({pathname: "/results", params: { results: [...clickTimes, performance.now()] } })
+      router.push({ pathname: "/results", params: { results: [...clickTimes, performance.now()] } })
     }
   }
 
   return (
-    <View style={{...globalStyle.container, backgroundColor: "#050505"}}>
+    <View style={{ ...globalStyle.container, backgroundColor: "#050505" }}>
       <Stack.Screen options={{
         title: "Home",
         headerShown: false,
@@ -38,6 +42,10 @@ export default function App() {
       }}
         onPress={() => { addClick() }}
       ></TouchableOpacity>
+      <View style={{ height: 50 }} />
+      <Link href="/history">
+        <Text style={{ ...globalStyle.text, color: "yellow" }}>View History</Text>
+      </Link>
     </View>
   );
 }
