@@ -14,6 +14,11 @@ const globalStyle = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
   },
+  h3: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   container: {
     flex: 1,
     fontSize: 20,

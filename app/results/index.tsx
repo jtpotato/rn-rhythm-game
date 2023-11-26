@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { GameResults, getLastGame } from "../../src/logic/gameManager";
 import globalStyle from "../../src/styles";
 import { View, Text, SafeAreaView } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { analyseResults, calculateDiffs } from "../../src/logic/analyseResults";
 import TimeBetweenClicks from "../../src/graphs/TimeBetweenClicks";
 import { getStats } from "../../src/logic/statsManager";
@@ -24,18 +24,23 @@ function ResultsPage() {
     }, [])
 
     return (<>
-        <SafeAreaView>
-            <View style={{ padding: 20 }}>
-                <Text style={globalStyle.h2}>Results</Text>
-                <ResultsTable results={analysedResults} />
-                <Text style={globalStyle.h2}>Time Between Taps (ms)</Text>
-                <View style={{ flex: 1, justifyContent: "center", paddingTop: 20 }}>
-                    <TimeBetweenClicks diffs={diffs} />
+        <View style={{ backgroundColor: "#050505", flex: 1 }}>
+            <Stack.Screen options={{
+                title: "Results",
+            }} />
+            <SafeAreaView>
+                <View style={{ padding: 20 }}>
+                    <ResultsTable results={analysedResults} />
+                    <Text style={globalStyle.h3}>Time Between Taps (ms)</Text>
+                    <View style={{ flex: 1, justifyContent: "center", paddingTop: 20 }}>
+                        <TimeBetweenClicks diffs={diffs} />
+                    </View>
+                    <View style={{ height: 210 }} />
                 </View>
-                <View style={{ height: 210 }} />
-            </View>
-            <StatusBar />
-        </SafeAreaView>
+                <StatusBar />
+            </SafeAreaView>
+        </View>
+
     </>);
 }
 

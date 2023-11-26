@@ -1,16 +1,18 @@
-
-import { Slot } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import { View } from "react-native";
+
+export const unstable_settings = {
+    initialRouteName: "index"
+}
 
 function RootLayout() {
     return (<>
-        <View style={{
-            flex: 1,
-            backgroundColor: "#000"
-        }}>
-            <Slot />
-        </View>
-
+        <Stack screenOptions={{
+            headerStyle: { backgroundColor: "#050505" },
+            headerTintColor: "yellow",
+            headerBackTitleVisible: true,
+            headerTitleStyle: { fontWeight: "bold" },
+        }} />
     </>);
 }
 

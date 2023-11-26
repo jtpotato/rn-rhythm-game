@@ -6,7 +6,7 @@ import globalStyle from "../src/styles";
 import { saveGame } from "../src/logic/gameManager";
 import { analyseResults } from "../src/logic/analyseResults";
 import { saveStats } from "../src/logic/statsManager";
-import { router } from "expo-router";
+import { Stack, router } from "expo-router";
 
 export default function App() {
   const [clickTimes, setClickTimes] = useState<number[]>([]);
@@ -23,7 +23,11 @@ export default function App() {
   }
 
   return (
-    <View style={globalStyle.container}>
+    <View style={{...globalStyle.container, backgroundColor: "#050505"}}>
+      <Stack.Screen options={{
+        title: "Home",
+        headerShown: false,
+      }} />
       <Text style={globalStyle.text}>Maintain a consistent rhythm.</Text>
       <Text style={globalStyle.text}>Tap {8 - clickTimes.length} times.</Text>
       <TouchableOpacity style={{
