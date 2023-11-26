@@ -1,34 +1,43 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import globalStyle from "../src/styles";
+import { saveGame } from "../src/logic/gameManager";
+import { analyseResults } from "../src/logic/analyseResults";
+import { saveStats } from "../src/logic/statsManager";
+import { router } from "expo-router";
 
 export default function App() {
   const [clickTimes, setClickTimes] = useState<number[]>([]);
 
+  function addClick() {
+    setClickTimes([...clickTimes, performance.now()]);
+
+    if (8 - clickTimes.length == 1) {
+      // saveGame([...clickTimes, performance.now()])
+      saveStats([...clickTimes, performance.now()])
+      setClickTimes([])
+      router.push({pathname: "/results", params: { results: [...clickTimes, performance.now()] } })
+    }
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={{ color: "#fff", fontSize: 16 }}>Tap with a consistent rhythm.</Text>
+    <View style={globalStyle.container}>
+      <Text style={globalStyle.text}>Maintain a consistent rhythm.</Text>
+      <Text style={globalStyle.text}>Tap {8 - clickTimes.length} times.</Text>
       <TouchableOpacity style={{
         backgroundColor: "yellow",
         borderRadius: 100,
         width: 200,
-        height:200
+        height: 200,
       }}
-      onPress={() => { setClickTimes(v => [...v, performance.now()]) }}
+        onPress={() => { addClick() }}
       ></TouchableOpacity>
-      <StatusBar style="auto" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    color: "#fff",
-    backgroundColor: "#000",
-    fontSize: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 20,
-  },
+
 });
