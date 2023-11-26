@@ -17,20 +17,28 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.jtpotaot.rhythmgame"
+      "bundleIdentifier": "com.jtpotato.rhythmgame"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.rnrhythmgame"
+      "package": "com.anonymous.rhythmgame"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "c682d15e-b23f-465c-8ef8-73cdaf2b70bc"
+      }
+    }
   }
 }
